@@ -21,15 +21,21 @@ def keep_alive():
     t.start()
 
 
-ai.configure(api_key='AIzaSyCkX9V8srY8eH1WkiOF-_0EtCvJWFZyxZ8')
+# Replace with your actual API key
+YOUR_GOOGLE_API_KEY = 'YOUR_API_KEY'
+ai.configure(api_key=YOUR_GOOGLE_API_KEY)
 model = ai.GenerativeModel('gemini-1.0-pro-latest')
-BOT_TOKEN = '7388037130:AAG2m-73cCSe4OmRoJUsxUsCb-YRb3vXlnc'
-bot = telebot.TeleBot(BOT_TOKEN)
 
-NEWS_API_URL = 'https://newsapi.org/v2/everything?q={query}&apiKey=dc45a87d3bb643ddab46b2e7b1ee8bb6'
+# Replace with your actual Telegram bot token
+YOUR_BOT_TOKEN = 'YOUR_BOT_TOKEN'
+bot = telebot.TeleBot(YOUR_BOT_TOKEN)
+
+# Replace with your actual News API key
+YOUR_NEWS_API_KEY = 'YOUR_NEWS_API_KEY'
+NEWS_API_URL = f'https://newsapi.org/v2/everything?q={{query}}&apiKey={YOUR_NEWS_API_KEY}'
 
 def get_weather(location):
-    url = f'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=metric&appid=ca68d07cd7575eef2a74c9673615d745'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=metric&appid=YOUR_OPEN_WEATHER_MAP_API_KEY'  # Replace with your OpenWeatherMap API key
     print(url)
     response = requests.get(url)
     if response.status_code == 200:
@@ -106,9 +112,7 @@ def get_news(query):
 @bot.message_handler(func=lambda message: True)
 def handle_text(message):
     print(message.text)
-    if message.text.lower() == '/start' or message.text.lower(
-    ) == '/hello' or message.text.lower() == '/hi' or message.text.lower(
-    ) == 'hi':
+    if message.text.lower() == '/start' or message.text.lower() == '/hello' or message.text.lower() == '/hi' or message.text.lower() == 'hi':
         bot.reply_to(
             message,
             "Hi there! this bot was created by Varrey Abhiram Sai Ganesh contact @abhiramvarrey else use comands in menu or type your query to respond with ai bot"
